@@ -20,10 +20,10 @@
 
 <body>
     {% load static %}
-    <div id="loader-wrapper">
+    <!-- <div id="loader-wrapper">
         <video id="loader" autoplay loop muted playsinline src="../media/logo/logo_1_1.mp4"></video>
         <div class="loader-section"></div>
-    </div>
+    </div> -->
     <div class="slideshow-container">
         <div id="mynav">
             <div class="topnav">
@@ -31,18 +31,19 @@
                 <a class="link" href="{% url 'contacts' %}">Contact</a>
                 <a class="link" href="{% url 'about' %}">About</a>
                 <a href="#home" class="icon">
-                    <img class="iconimg" src="../media/logo/logo.png">
+                    <!-- <img class="iconimg" src="../media/logo/logo.png"> -->
+                    <img class="iconimg" src="../media/logo/logo1.png">
                 </a>
             </div>
         </div>
         <div class="mySlides">
-            <img class="slides" src="../media/images/main/homepage_images/11.png" style="width:100%;">
+            <img class="slides" src="../media/images/main/homepage_images/shop4.jpg" style="width:100%; height: 600px;">
         </div>
         <div class="mySlides">
-            <img class="slides" src="../media/images/main/homepage_images/12.png" style="width:100%;">
+            <img class="slides" src="../media/images/main/homepage_images/shop1.jpg" style="width:100%;height: 600px;">
         </div>
         <div class="mySlides">
-            <img class="slides" src="../media/images/main/homepage_images/13.png" style="width:100%;">
+            <img class="slides" src="../media/images/main/homepage_images/shop12.jpg" style="width:100%;height: 600px;">
         </div>
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
         <a class="next" onclick="plusSlides(1)">&#10095;</a>
@@ -72,9 +73,9 @@
             <fieldset class="field">
                 <img class="imgsvg" src="../media/images/main/homepage_images/icon_home_2.svg">
                 <br>
-                Pick a menu
+                Pick a Shop
                 <br>
-                North,South,Chinese
+                of your choice
             </fieldset>
         </div>
         <div>
@@ -101,27 +102,25 @@
                 <br>
                 Rating
                 <br>
-                You can rate our cooks
+                You can rate the shops
             </fieldset>
         </div>
     </div>
     <div width="100%" style="height: 400px;">
         <p class="text4-main">
-            <span class="text4">HomeCook !</span>
+            <span class="text4">LocalShopee !</span>
             <br>
-            Where Happiness is truly Homemade.
+            Where Local business is supported.
             <br>
-            All our meals are freshly prepared for you with the ingredients available with our Yummakers. Every Yummaker
-            who looks to join us, goes through a detailed and impartial checks to ensure that you get true home cooked
-            meal.
-            <br>
-            We check their kitchens, audit them and even go through their grocery bills to ensure they are buying the
-            raw materials from clean sources.
+            Did you ever imagine that all the goods and products you need could be handpicked and delivered to your home, all at the click of a button? <br>
+            Enjoy buying online without travelling long distances or standing in long queues. <br>
+            Need things fresh? Whether it’s fruits and vegetables or dairy, we have this covered as well! 
+           
         </p>
         <!-- <img class="text4-img" src="https://previews.123rf.com/images/kazakphoto/kazakphoto1410/kazakphoto141000092/32271969-young-woman-cooking-in-the-kitchen-healthy-food-dieting-concept-healthy-lifestyle-cooking-at-home-pr.jpg" height="400px"> -->
         <div class="text4-img">
-            <img class="text4-imgcol" src="../media/images/main/homepage_images/one9.png">
-            <img class="text4-imgcol" src="../media/images/main/homepage_images/two9.png">
+            <img class="text4-imgcol" src="../media/images/main/homepage_images/shopee1.jpg">
+            <img class="text4-imgcol" src="../media/images/main/homepage_images/shopee2.jpg">
         </div>
     </div>
     <br>
@@ -129,10 +128,10 @@
     <br>
     <div class="Mcards">
         <div class="Mcard">
-            <img class="card__image" src="../media/images/main/homepage_images/chole.png" alt="">
+            <img class="card__image" src="../media/images/main/homepage_images/shopee3.jpg" alt="">
             <div class="card__content">
                 <p style="font-size: 20px;">
-                    Chole
+                    Grocery Shop
                 </p>
             </div>
             <div class="card__info">
@@ -146,10 +145,10 @@
             </div>
         </div>
         <div class="Mcard">
-            <img class="card__image" src="../media/images/main/homepage_images/chole.png" alt="">
+            <img class="card__image" src="../media/images/main/homepage_images/shopee4.jpg" alt="">
             <div class="card__content">
                 <p style="font-size: 20px;">
-                    Chole
+                    Kitchen Accessories Shop
                 </p>
             </div>
             <div class="card__info">
@@ -163,10 +162,10 @@
             </div>
         </div>
         <div class="Mcard">
-            <img class="card__image" src="../media/images/main/homepage_images/chole.png" alt="">
+            <img class="card__image" src="../media/images/main/homepage_images/shopee5.jpg" alt="">
             <div class="card__content">
                 <p style="font-size: 20px;">
-                    Chole
+                    Local Clothes shop
                 </p>
             </div>
             <div class="card__info">
@@ -180,10 +179,10 @@
             </div>
         </div>
         <div class="Mcard">
-            <img class="card__image" src="../media/images/main/homepage_images/chole.png" alt="">
+            <img class="card__image" src="../media/images/main/homepage_images/shopee6.jpg" alt="">
             <div class="card__content">
                 <p style="font-size: 20px;">
-                    Chole
+                    Furniture Shop
                 </p>
             </div>
             <div class="card__info">
@@ -198,7 +197,7 @@
         </div>
     </div>
     <footer id="footer">
-        <p class="end">© Copyright 2020 HomeCooking</p>
+        <p class="end">© Copyright 2020 LocalShopee</p>
     </footer>
     <script>
         var slideIndex = 1;
