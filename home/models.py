@@ -17,6 +17,8 @@ class Cinfo(models.Model):
 
 
 class Vinfo(models.Model):
+    choices = (('Grocery', 'Grocery'), ('Dairy',
+                                             'Dairy'), ('Electronics', 'Electronics'), ('Food','Food'))
     Name = models.CharField(max_length=255)
     Username = models.CharField(max_length=255)
     Password = models.CharField(max_length=20)
@@ -25,16 +27,19 @@ class Vinfo(models.Model):
     Aadhar = models.CharField(max_length=255)
     Code=models.IntegerField(null=True)
     PhoneNo = models.CharField(max_length=12)
-    Kitchen = models.CharField(max_length=255)
+    Shop = models.CharField(max_length=255)
     Address=models.CharField(max_length=1000)
+    Category = models.CharField(max_length=255, choices=choices)
     Image=models.ImageField(upload_to="images/vendor/profile/",null=True,blank=True,default="images/vendor/profile/default-vendor.PNG")
 
 
 class Vendoradd(models.Model):
+    
     Username = models.TextField()
     name = models.CharField(max_length=255)
     price=models.IntegerField()
     quantity=models.IntegerField()
+    
 
 class Feedbacks(models.Model):
     name=models.CharField(max_length=255)

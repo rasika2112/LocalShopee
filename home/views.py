@@ -43,6 +43,7 @@ def login(request):
     if request.method=="POST":
         Username=request.POST.get('Username')
         Password=request.POST.get('Password')
+        Code=request.POST.get('Code')
         
         if Vinfo.objects.filter(Username=Username,Password=Password).exists() :
             user = User.objects.get(username=Username)
@@ -53,6 +54,8 @@ def login(request):
 
         elif Cinfo.objects.filter(Username=Username,Password=Password).exists():
             user = User.objects.get(username=Username)
+            if Code!='':
+                Cinfo.objects.filter(Username=Username,Password=Password).update(Code=Code)
             auth.login(request, user)
             if request.GET.get("next",None):
                 return HttpResponseRedirect(request.GET['next'])
@@ -172,12 +175,12 @@ def vprofile(request):
         Code = request.POST['Code']
         PhoneNo = request.POST['PhoneNo']
         Address = request.POST['Address']
-        Kitchen = request.POST['Kitchen']
+        Shop = request.POST['Shop']
         if(Confirm==Password):
             Vinfo.objects.filter(Username=request.user.username).update(Username=request.user.username, Name=Name,
                                                                         Email=Email, Password=Password,
                                                                         Aadhar=Aadhar, Code=Code, PhoneNo=PhoneNo,
-                                                                        Address=Address, Kitchen=Kitchen,
+                                                                        Address=Address, Shop=Shop,
                                                                         Confirm=Confirm
                                                                         )
 
@@ -257,7 +260,7 @@ def customer1(request):
     customer_code=cprofile[0].Code
     vendor=Vinfo.objects.filter(Code=customer_code)
     items=Vendoradd.objects.filter()
-    return render(request,'customer1.html',{'vendor':vendor,'items':items,'cprofile':cprofile})
+    return render(request,'customer1.html',{'vendor':vendor,'items':items[:3],'cprofile':cprofile})
 
 @login_required(login_url="login")
 def customer2(request,vendorname):
@@ -265,7 +268,7 @@ def customer2(request,vendorname):
     userv=vendorname
     items = Vendoradd.objects.filter(Username=userv)
     vendor = Vinfo.objects.filter(Username=userv)
-    vkitchen=vendor[0].Kitchen
+    vkitchen=vendor[0].Shop
     return render(request,'customer2.html',{'items':items,'userv':userv,'vendor':vendor,'vkitchen':vkitchen})
 
 @login_required(login_url="login")

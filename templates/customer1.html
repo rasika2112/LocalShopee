@@ -53,19 +53,24 @@
                 <img class="card__image" src="{{card.Image.url}}"> {% endif %}
                 <div class="card__content">
                     <p id="kitchenname" name="kitchenname" style="font-size: 20px;">
-                        {{card.Kitchen}}
+                        {{card.Shop}}
                     </p>
                     <p>
-                        {% for food in items %} {% if food.Username == card.Username %} {{food.name}}, {% endif %} {% endfor %}
+                        {% for food in items %} {% if food.Username == card.Username %} {{food.name}} 
+                        <font class="card__price" style="float: right;">
+                            Rs. {{ food.price }} per item
+                        </font>
+                        <br>
+                        {% endif %} 
+                    {% endfor %}
                     </p>
                 </div>
-                <div class="card__info">
-                    <div>
-                        <i class="material-icons">thumb_up</i>140
+                <div class="card__info" >
+                    <div style="float: right;">
+                        {{ card.Category }}
                     </div>
-                    <div class="card__price">
-                        Rs200 for 2
-                    </div>
+                    
+                    
                 </div>
             </div>
         </a>

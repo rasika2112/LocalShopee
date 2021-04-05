@@ -27,7 +27,12 @@
     <div class="slideshow-container">
         <div id="mynav">
             <div class="topnav">
+                {% if user.is_authenticated %}
+                <a class="link" href="{% url 'logout' %}">Logout</a>
+                <a class="link" href="{% url 'index' %}">Welcome, {{user.username}}</a>
+                {% else %}
                 <a class="link" href="{% url 'login' %}">Login/Signup</a>
+                {% endif %}
                 <a class="link" href="{% url 'contacts' %}">Contact</a>
                 <a class="link" href="{% url 'about' %}">About</a>
                 <a href="#home" class="icon">
