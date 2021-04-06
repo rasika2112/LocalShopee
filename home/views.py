@@ -256,11 +256,22 @@ def cprofile(request):
 
 @login_required(login_url="login")
 def customer1(request):
-    cprofile=Cinfo.objects.filter(Username=request.user.username)
-    customer_code=cprofile[0].Code
-    vendor=Vinfo.objects.filter(Code=customer_code)
-    items=Vendoradd.objects.filter()
-    return render(request,'customer1.html',{'vendor':vendor,'items':items[:3],'cprofile':cprofile})
+    if request.method == 'POST':
+        category = request.POST['category']
+        cprofile=Cinfo.objects.filter(Username=request.user.username)
+        customer_code=cprofile[0].Code
+        if category!='All':
+            vendor=Vinfo.objects.filter(Code=customer_code,Category=category)
+        else:
+            vendor=Vinfo.objects.filter(Code=customer_code)
+        items=Vendoradd.objects.filter()
+        return render(request,'customer1.html',{'vendor':vendor,'items':items[:3],'cprofile':cprofile})
+    else:
+        cprofile=Cinfo.objects.filter(Username=request.user.username)
+        customer_code=cprofile[0].Code
+        vendor=Vinfo.objects.filter(Code=customer_code)
+        items=Vendoradd.objects.filter()
+        return render(request,'customer1.html',{'vendor':vendor,'items':items[:3],'cprofile':cprofile})
 
 @login_required(login_url="login")
 def customer2(request,vendorname):

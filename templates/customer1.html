@@ -35,7 +35,9 @@
         <a class="link" href="{% url 'cprofile' %}">View Profile</a>
 
         <a class="link" href="{% url 'customer_orders' %}">Your Orders</a>
-        <a href="#home" class="icon"><img class="iconimg" src="../media/logo/logo.png"></a>
+        
+
+        <a href="{% url 'index' %}" class="icon"><img class="iconimg" src="../media/logo/logo.png"></a>
 
     </div>
 </div>
@@ -44,6 +46,23 @@
 
 
 <div class="wrapper">
+    <form action="customer1" method="POST">
+        {% csrf_token %}
+    <div style="padding-right: 6rem; padding-top: 3rem;">
+        <button type="submit" style="float: right;">Go</button>
+        <div style="padding-right: 5rem;">
+    <select name="category" id="category" style="float: right;">
+        <option value="Grocery">Grocery</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Dairy">Dairy</option>
+        <option value="Food">Food</option>
+        <option value="All">All</option>
+        </select>
+    </div>
+        <label for="category" style="float: right; padding-right: 2rem;">Choose a category:</label>
+        
+    </div>
+</form>
     <div class="grid-wrapper">
         {% for card in vendor %}
 
