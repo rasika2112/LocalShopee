@@ -13,6 +13,8 @@ class Cinfo(models.Model):
     Code=models.IntegerField()
     PhoneNo= models.CharField(max_length=12)
     Address=models.CharField(max_length=1000)
+    is_verified = models.BooleanField(default=False)
+    otp = models.IntegerField(null=True)
     Image = models.ImageField(upload_to="images/customer/profile/", null=True, blank=True,default="images/customer/profile/default-customer.png")
 
 
@@ -30,6 +32,8 @@ class Vinfo(models.Model):
     Shop = models.CharField(max_length=255)
     Address=models.CharField(max_length=1000)
     Category = models.CharField(max_length=255, choices=choices)
+    is_verified = models.BooleanField(default=False)
+    otp = models.IntegerField(null=True)
     Image=models.ImageField(upload_to="images/vendor/profile/",null=True,blank=True,default="images/vendor/profile/default-vendor.PNG")
 
 

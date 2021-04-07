@@ -13,6 +13,9 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 import re
+from django.core.mail import send_mail
+from django.conf import settings
+import random
 
 # Create your views here.
 def index(request):   
@@ -47,19 +50,37 @@ def login(request):
         
         if Vinfo.objects.filter(Username=Username,Password=Password).exists() :
             user = User.objects.get(username=Username)
-            auth.login(request,user)
-            if request.GET.get("next",None):
-                return HttpResponseRedirect(request.GET['next'])
-            return redirect("vendoradd")
+            V = Vinfo.objects.get(Username=Username)
+            if V.is_verified == True:
+                auth.login(request,user)
+                if request.GET.get("next",None):
+                    return HttpResponseRedirect(request.GET['next'])
+                return redirect("vendoradd")
+            else:
+                otp = random.randint(1000,9999)
+                Vinfo.objects.filter(Username=Username).update(otp=otp)
+                send_mail(subject="OTP VERIFICATION",message="YOUR NO. IS "+ str(otp),from_email=settings.EMAIL_HOST_USER,recipient_list=[user.email],fail_silently=False)
+                return render(request,'sentemail.html')
 
         elif Cinfo.objects.filter(Username=Username,Password=Password).exists():
             user = User.objects.get(username=Username)
-            if Code!='':
-                Cinfo.objects.filter(Username=Username,Password=Password).update(Code=Code)
-            auth.login(request, user)
-            if request.GET.get("next",None):
-                return HttpResponseRedirect(request.GET['next'])
-            return redirect("customer1")
+            C = Cinfo.objects.get(Username=Username)
+            if C.is_verified == True:
+                
+                if Code!='':
+                    Cinfo.objects.filter(Username=Username,Password=Password).update(Code=Code)
+                auth.login(request, user)
+                if request.GET.get("next",None):
+                    return HttpResponseRedirect(request.GET['next'])
+                return redirect("customer1")
+            else:
+                #save otp
+                otp = random.randint(1000,9999)
+                Cinfo.objects.filter(Username=Username).update(otp=otp)
+                send_mail(subject="OTP VERIFICATION",message="YOUR NO. IS "+ str(otp) ,from_email=settings.EMAIL_HOST_USER,recipient_list=[user.email],fail_silently=False)
+                return render(request,'sentemail.html')
+
+                
         
         else:
             messages.info(request, 'Invalid credentials')
@@ -87,11 +108,19 @@ def vsignin(request):            #vendor signin
                 messages.info(request, 'Username already exists')
                 return redirect('vsignin')
             else:
+                
+                otp = random.randint(1000,9999)
+                
+                send_mail(subject="OTP VERIFICATION",message="YOUR NO. IS " + str(otp) ,from_email=settings.EMAIL_HOST_USER,recipient_list=[Email],fail_silently=False)
                 v_form.save()
+                #save otp
                 user = User.objects.create_user(username=username,password=password,email=Email)
+                Vinfo.objects.filter(Username=username).update(is_verified=False)
+                Vinfo.objects.filter(Username=username).update(otp=otp)
                 user.save()
-                login(request)
-                return redirect('vendoradd')
+                return render(request,'sentemail.html')
+                # login(request)
+                # return redirect('vendoradd')
         else:
             return render(request, 'vsignin.html', context)
     else:
@@ -115,17 +144,51 @@ def csignin(request):            #customer signin
                 messages.info(request, 'Username already exists')
                 return redirect('csignin')
             else:
+                otp = random.randint(1000,9999)
+                
+                send_mail(subject="OTP VERIFICATION",message="YOUR NO. IS "+ str(otp),from_email=settings.EMAIL_HOST_USER,recipient_list=[Email],fail_silently=False)
+
                 c_form.save()
+                #save otp
                 user = User.objects.create_user(username=username,password=password,email=Email)
+                Cinfo.objects.filter(Username=username).update(is_verified=False)
+                Cinfo.objects.filter(Username=username).update(otp=otp)
                 user.save()
-                login(request)
-                return redirect('customer1')
+                return render(request,'sentemail.html')
+                # login(request)
+                # return redirect('customer1')
         else:
             return render(request, 'csignin.html', context)
     else:
         c_form = CustomerForm()
         context['c_form'] = c_form
         return render(request, 'csignin.html', context)
+
+def otp(request):
+    if request.method == 'POST':
+        Username=request.POST.get('Username')
+        Password=request.POST.get('Password')
+        Otp=request.POST.get('otp')
+        #fetch otp from database
+        if Vinfo.objects.filter(Username=Username,Password=Password).exists():
+            correct_otp = Vinfo.objects.get(Username=Username)
+            if Otp == str(correct_otp.otp):
+                Vinfo.objects.filter(Username=Username).update(is_verified=True)
+                return redirect('login')
+            else:
+                return render(request,'sentemail.html')
+
+        elif Cinfo.objects.filter(Username=Username,Password=Password).exists():
+            correct_otp = Cinfo.objects.get(Username=Username)
+            if Otp == str(correct_otp.otp):
+                Cinfo.objects.filter(Username=Username).update(is_verified=True)
+                return redirect('login')
+            else:
+                return render(request,'sentemail.html')
+
+
+        
+        
 
 
 

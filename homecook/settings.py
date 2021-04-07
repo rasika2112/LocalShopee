@@ -143,3 +143,13 @@ CRISPY_TEMPLATE_PACK='bootstrap4'
 
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+
+#SMTP CONFIGURATIONS
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'localshoppe11@gmail.com'
+EMAIL_HOST_PASSWORD = 'Go_local11'
+EMAIL_PORT = 587

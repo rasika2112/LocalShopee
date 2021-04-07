@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div>
+   <h3>EMAIL SENT FOR VERFICATION</h3>
+  
+      <form action="otp" method="POST">
+         {% csrf_token %}
+         <br><br>
+         <fieldset><br><br>
+             <h1 style="text-align:center;font-size:30px;"><i>local</i><span style="color:red;">SHOPEE</span></h1>
+             <h1>OTP VERIFICATION</h1>
+             <!-- <br><br> New Customer <a href="{% url 'csignin' %}"> SignUp</a><br> New Vendor <a href="{% url 'vsignin' %}"> SignUp</a><br><br> -->
+             <label for="Username"> Username:</label> &nbsp;
+             <input type="text" placeholder="Enter Valid Uswername" id="Username" name="Username" size="24">
+             <br><br>
+             <label for="Password">Password: </label>
+             <input type="password" placeholder="Enter password" id="Password" name="Password" maxlength="20" size="24">
+             <br><br>
+             <label for="otp">OTP: </label>
+             <input type="password" placeholder="Enter otp" id="otp" name="otp" minlength="4" maxlength="4" size="24">
+             <br><br>
+             <button type="submit"><b>Verify</b></button>
+             <br><br><br>
+             <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+             <br><br>
+         </fieldset>
+
+     
+
+   </form>
+
+</div>
+
+{% endblock content %}
