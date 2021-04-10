@@ -17,10 +17,16 @@ class Cinfo(models.Model):
     otp = models.IntegerField(null=True)
     Image = models.ImageField(upload_to="images/customer/profile/", null=True, blank=True,default="images/customer/profile/default-customer.png")
 
+deliver = (
+    ("Morning","Morning"),
+    ("Afternoon","Afternoon"),
+    ("Evening","Evening"),
+)
+
 
 class Vinfo(models.Model):
     choices = (('Grocery', 'Grocery'), ('Dairy',
-                                             'Dairy'), ('Electronics', 'Electronics'), ('Food','Food'))
+                                             'Dairy'), ('Electronics', 'Electronics'), ('Food','Food'), ('Medical','Medical'))
     Name = models.CharField(max_length=255)
     Username = models.CharField(max_length=255)
     Password = models.CharField(max_length=20)
@@ -35,6 +41,7 @@ class Vinfo(models.Model):
     is_verified = models.BooleanField(default=False)
     otp = models.IntegerField(null=True)
     Image=models.ImageField(upload_to="images/vendor/profile/",null=True,blank=True,default="images/vendor/profile/default-vendor.PNG")
+    delivery = models.CharField(choices=deliver, max_length=255)
 
 
 class Vendoradd(models.Model):
@@ -61,6 +68,7 @@ ORDER_STATUS = (
     ("delivered", "delivered"),  
 ) 
 
+
 class Order(models.Model):
     orderId=models.AutoField(primary_key=True)
     customer=models.ForeignKey(Cinfo,on_delete=models.CASCADE,related_name="customer")
@@ -80,3 +88,4 @@ class Order(models.Model):
         choices = ORDER_STATUS, 
         default = 'placed'
         ) 
+    

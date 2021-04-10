@@ -11,7 +11,7 @@ class VendorForm(forms.ModelForm):
 
     class Meta:
         model = Vinfo
-        fields = ['Name','Username','Password','Confirm','Email','Aadhar','Code','PhoneNo','Shop','Address','Image','Category']
+        fields = ['Name','Username','Password','Confirm','Email','Aadhar','Code','PhoneNo','Shop','Address','Category','delivery','Image']
 
 
 class CustomerForm(forms.ModelForm):

@@ -362,6 +362,7 @@ def payment(request):
         priceDetails['delivery']=request.POST.get("deliveryInput")
         priceDetails['discount']=request.POST.get("discountInput")
         priceDetails['grandTotal']=request.POST.get("grandTotalInput")
+        
         return render(request,"payment.html",{'priceDetails':priceDetails,'cprofile':cprofile[0], 'userv':userv})
     else:
         return render(request,"payment.html")

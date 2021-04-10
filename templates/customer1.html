@@ -49,17 +49,19 @@
     <form action="customer1" method="POST">
         {% csrf_token %}
     <div style="padding-right: 6rem; padding-top: 3rem;">
-        <button type="submit" style="float: right;">Go</button>
+        <button type="submit" style="float: right;" class="btn btn-danger">Go</button>
         <div style="padding-right: 5rem;">
-    <select name="category" id="category" style="float: right;">
+
+    <select name="category" id="category" style="float: right; height: 35px; width: 15rem;">
         <option value="Grocery">Grocery</option>
         <option value="Electronics">Electronics</option>
         <option value="Dairy">Dairy</option>
         <option value="Food">Food</option>
+        <option value="Medical">Medical</option>
         <option value="All">All</option>
         </select>
     </div>
-        <label for="category" style="float: right; padding-right: 2rem;">Choose a category:</label>
+        <!-- <label for="category" style="float: right; padding-right: 2rem;">Choose a category:</label> -->
         
     </div>
 </form>
@@ -85,8 +87,12 @@
                     </p>
                 </div>
                 <div class="card__info" >
-                    <div style="float: right;">
+                    <div style="float: left;">
                         {{ card.Category }}
+                    </div>
+                        <div style="float: right;">
+                        Delivery: {{ card.delivery }}
+                    
                     </div>
                     
                     
