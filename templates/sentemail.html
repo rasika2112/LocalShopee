@@ -1,9 +1,47 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block css %} {% load static %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-image: url("../media/images/main/background/loginBg.jfif");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+        
+        fieldset {
+            border-radius: 25px;
+            background-color: white;
+            width: 500px;
+        }
+        
+        label {
+            display: inline-block;
+            width: 70px;
+            text-align: right;
+        }
+        
+        button {
+            padding: 10px 20px;
+            color: whitesmoke;
+            border-radius: 10px;
+            border: 0px;
+            background-color: rgb(219, 16, 16);
+        }
+        
+        button:hover {
+            background-color: rgb(255, 0, 0);
+        }
+    </style>
+    {% endblock css %} 
 
 {% block content %}
 
+<center>
+
+   <body>
 <div>
-   <h3>EMAIL SENT FOR VERFICATION</h3>
+   <h3 style="padding: 20px;color: white;padding-top: 40px;">EMAIL SENT FOR VERFICATION</h3>
   
       <form action="otp" method="POST">
          {% csrf_token %}
@@ -32,5 +70,6 @@
    </form>
 
 </div>
-
+</body>
+</center>
 {% endblock content %}
