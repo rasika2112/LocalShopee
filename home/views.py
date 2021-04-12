@@ -383,6 +383,9 @@ def customer_orders(request):
             if (li[i]!="quantity" and li[i]!="price"):
                 li2.append(li[i])         
         for i in range(0,len(li2),3):
+            final = Vendoradd.objects.get(Username=vendor_username,name=str(li2[i]))
+            final_quantity = final.quantity - int(li2[i+1])
+            Vendoradd.objects.filter(Username=vendor_username,name=str(li2[i])).update(quantity=final_quantity)
             item=str(li2[i])+" - "+str(li2[i+1])+" x ₹"+str(li2[i+2])
             li3.append(item)
         ordered_items=" ,  ".join(li3)
