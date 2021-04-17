@@ -276,6 +276,26 @@ def vendor_orders(request):
 @login_required(login_url="login")
 def order_status(request,orderId,status):
     Order.objects.filter(orderId=orderId).update(status=status)
+    # if status=="accepted":
+    #     li = Order.objects.filter(orderId=orderId)[0]
+    #     print(li)
+    #     # Veg Thali - 5 x rs
+    #     li1 = li.ordered_items.split(" , ")
+    #     print(li1)
+    #     li2 = []
+    #     lii = []
+    #     # Veg Thali - 5 and rs
+    #     for i in li1:
+    #         lii+=i.split(" x ")
+    #     print(lii)
+    #     # Veg Thali and 5
+    #     for j in range(0,len(lii),2):
+    #         li2+=lii[j].split(" - ")
+    #     print(li2)
+    #     for i in range(0,len(li2),2):
+    #         final = Vendoradd.objects.get(Username=request.user.username,name=str(li2[i]))
+    #         final_quantity = final.quantity - int(li2[i+1])
+    #         Vendoradd.objects.filter(Username=request.user.username,name=str(li2[i])).update(quantity=final_quantity)
     if status=="delivered":
         ordered_items=Order.objects.filter(orderId=orderId)[0].ordered_items.replace(" ","")
         ordered_items=re.split('-|x|,',ordered_items)
@@ -383,9 +403,9 @@ def customer_orders(request):
             if (li[i]!="quantity" and li[i]!="price"):
                 li2.append(li[i])         
         for i in range(0,len(li2),3):
-            final = Vendoradd.objects.get(Username=vendor_username,name=str(li2[i]))
-            final_quantity = final.quantity - int(li2[i+1])
-            Vendoradd.objects.filter(Username=vendor_username,name=str(li2[i])).update(quantity=final_quantity)
+            # final = Vendoradd.objects.get(Username=vendor_username,name=str(li2[i]))
+            # final_quantity = final.quantity - int(li2[i+1])
+            # Vendoradd.objects.filter(Username=vendor_username,name=str(li2[i])).update(quantity=final_quantity)
             item=str(li2[i])+" - "+str(li2[i+1])+" x ₹"+str(li2[i+2])
             li3.append(item)
         ordered_items=" ,  ".join(li3)
